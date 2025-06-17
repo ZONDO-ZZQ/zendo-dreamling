@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // GPT 请求函数
   async function fetchGPTResponse(userMessage) {
-    const response = await fetch('/api/getGPTResponse', {  // 调用后端API
+    const response = await fetch('http://localhost:5000/api/getGPTResponse', {  // 确保请求路径是后端的 API 地址
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: userMessage })
     });
 
     const data = await response.json();
-    return data.reply;  // 返回GPT的回复
+    return data.reply;  // 返回 GPT 的回复
   }
 });

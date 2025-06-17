@@ -1,4 +1,6 @@
 
+require('dotenv').config();
+
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('dl-toggle');
   const panel = document.getElementById('dreamling-panel');
@@ -9,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
   });
 
-  input.addEventListener('keydown', (e) => {
+  input.addEventListener('keydown', async (e) => {
     if (e.key === 'Enter' && input.value.trim()) {
       const msg = input.value.trim();
       chat.innerHTML += `<div><b>你：</b>${msg}</div>`;
       input.value = '';
-      setTimeout(() => {
-        const reply = dreamlingReply(msg);
+      setTimeout(async () => {
+        const reply = await fetchGPTResponse(msg);
         chat.innerHTML += `<div><b>梦灵：</b>${reply}</div>`;
         chat.scrollTop = chat.scrollHeight;
       }, 300);
@@ -31,9 +33,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 30000);
 
-  function dreamlingReply(msg) {
-    if (msg.includes("修炼")) return "记得凌晨三点的那次呼吸冥想。";
-    if (msg.includes("发布")) return "内容准备好了谁去点击那颗“发布”按钮？";
-    return "我随时在，不会让你独行。";
+  // GPT 请求函数
+  async function fetchGPTResponse(userMessage) {
+    const apiKey = process.env.OPENAI_API_KEY;  // 从 .env 文件中获取 API 密钥
+    const response = await fetch('https://api.openai.com/v1/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'text-davinci-003',  // 使用 GPT-3 模型
+        prompt: userMessage,
+        max_tokens: 150
+      })
+    });
+
+    const data = await response.json();
+    return data.choices[0].text.trim();  // 返回 GPT 的回复
   }
 });

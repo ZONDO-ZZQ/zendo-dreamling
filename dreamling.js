@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('dl-toggle');
   const panel = document.getElementById('dreamling-panel');
@@ -7,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('dl-input');
 
   toggle.addEventListener('click', () => {
-    panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+    // 切换显示/隐藏
+    panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'flex' : 'none';
   });
 
   input.addEventListener('keydown', async (e) => {
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // GPT 请求函数
   async function fetchGPTResponse(userMessage) {
-    const apiKey = process.env.OPENAI_API_KEY;  // 从 .env 文件中获取 API 密钥
+    const apiKey = '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';  // 直接在这里写你的 API 密钥
     const response = await fetch('https://api.openai.com/v1/completions', {
       method: 'POST',
       headers: {

@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const chat = document.getElementById('dl-chat');
   const input = document.getElementById('dl-input');
 
+  // 切换显示/隐藏
   toggle.addEventListener('click', () => {
-    // 切换显示/隐藏
     panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'flex' : 'none';
   });
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'text-davinci-003',  // 使用 GPT-3 模型
+        model: 'gpt-4',  // 使用 GPT-4 模型
         prompt: userMessage,
         max_tokens: 150
       })

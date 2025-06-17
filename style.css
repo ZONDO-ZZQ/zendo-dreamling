@@ -1,0 +1,54 @@
+
+#dl-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 24px;
+  background: #4b0082;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+#dreamling-panel {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  max-height: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+  font-family: sans-serif;
+  z-index: 9999;
+}
+
+#dl-header {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+#dl-chat {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+  max-height: 300px;
+}
+
+#dl-input {
+  width: calc(100% - 10px);
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
